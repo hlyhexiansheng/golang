@@ -4,7 +4,6 @@ import (
 	"github.com/open-falcon/common/model"
 	"github.com/toolkits/nux"
 	"sync"
-	"fmt"
 )
 
 const (
@@ -29,17 +28,6 @@ func UpdateCpuStat() error {
 	}
 
 	procStatHistory[0] = ps
-
-	for i := historyCount - 1; i >= 0; i-- {
-		if(procStatHistory[i] == nil){
-			fmt.Println("procStatHistory",i,"is nil")
-		}else {
-			fmt.Println(i,procStatHistory[i].String())
-		}
-
-	}
-
-
 	return nil
 }
 
@@ -163,7 +151,6 @@ func CpuPrepared() bool {
 
 func CpuMetrics() []*model.MetricValue {
 	if !CpuPrepared() {
-		fmt.Println("cpu not ready")
 		return []*model.MetricValue{}
 	}
 
