@@ -8,7 +8,7 @@ import (
 )
 
 func NetMetrics() []*model.MetricValue {
-	return CoreNetMetrics(g.Config().Collector.IfacePrefix)
+	return []string{"eth"}
 }
 
 func CoreNetMetrics(ifacePrefix []string) []*model.MetricValue {
