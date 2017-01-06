@@ -4,6 +4,7 @@ import (
 	"github.com/open-falcon/common/model"
 	"github.com/toolkits/nux"
 	"sync"
+	"fmt"
 )
 
 const (
@@ -151,6 +152,7 @@ func CpuPrepared() bool {
 
 func CpuMetrics() []*model.MetricValue {
 	if !CpuPrepared() {
+		fmt.Println("cpu not ready")
 		return []*model.MetricValue{}
 	}
 
