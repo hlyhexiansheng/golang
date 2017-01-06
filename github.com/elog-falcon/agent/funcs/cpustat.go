@@ -29,6 +29,17 @@ func UpdateCpuStat() error {
 	}
 
 	procStatHistory[0] = ps
+
+	for i := historyCount - 1; i >= 0; i-- {
+		if(procStatHistory[i] == nil){
+			fmt.Println("procStatHistory",i,"is nil")
+		}else {
+			fmt.Println(i,procStatHistory[i].String())
+		}
+
+	}
+
+
 	return nil
 }
 
