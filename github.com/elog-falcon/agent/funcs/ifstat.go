@@ -7,7 +7,7 @@ import (
 )
 
 func NetMetrics() []*model.MetricValue {
-	return []string{"eth"}
+	return CoreNetMetrics([]string{"eth"})
 }
 
 func CoreNetMetrics(ifacePrefix []string) []*model.MetricValue {
