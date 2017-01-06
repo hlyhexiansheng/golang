@@ -18,7 +18,7 @@ func BuildMappers() {
 			Fs: []func() []*model.MetricValue{
 				AgentMetrics,
 				CpuMetrics,
-				NetMetrics,
+				//NetMetrics,
 				KernelMetrics,
 				LoadAvgMetrics,
 				MemMetrics,
