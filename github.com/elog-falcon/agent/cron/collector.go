@@ -3,29 +3,20 @@ package cron
 import (
 	"time"
 
-	"github.com/open-falcon/agent/funcs"
-	"github.com/open-falcon/agent/g"
+	"github.com/elog-falcon/agent/funcs"
 	"github.com/open-falcon/common/model"
+	"fmt"
 )
 
 func InitDataHistory() {
 	for {
 		funcs.UpdateCpuStat()
 		funcs.UpdateDiskStats()
-		time.Sleep(g.COLLECT_INTERVAL)
+		time.Sleep(3)
 	}
 }
 
 func Collect() {
-
-	if !g.Config().Transfer.Enabled {
-		return
-	}
-
-	if len(g.Config().Transfer.Addrs) == 0 {
-		return
-	}
-
 	for _, v := range funcs.Mappers {
 		go collect(int64(v.Interval), v.Fs)
 	}
@@ -36,13 +27,10 @@ func collect(sec int64, fns []func() []*model.MetricValue) {
 	for {
 		<-t
 
-		hostname, err := g.Hostname()
-		if err != nil {
-			continue
-		}
+		hostname := "127.0.0.1";
 
 		mvs := []*model.MetricValue{}
-		ignoreMetrics := g.Config().IgnoreMetrics
+		ignoreMetrics := make(map[string]bool)
 
 		for _, fn := range fns {
 			items := fn()
@@ -68,9 +56,7 @@ func collect(sec int64, fns []func() []*model.MetricValue) {
 			mvs[j].Step = sec
 			mvs[j].Endpoint = hostname
 			mvs[j].Timestamp = now
+			fmt.Println(mvs[j].String())
 		}
-
-		g.SendToTransfer(mvs)
-
 	}
 }
