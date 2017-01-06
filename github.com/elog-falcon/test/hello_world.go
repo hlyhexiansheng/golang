@@ -8,9 +8,8 @@ import (
 func main() {
 	fmt.Println("hello,world1112224")
 
-	err := funcs.UpdateCpuStat()
-
-	fmt.Println(err)
+	funcs.UpdateCpuStat()
+	funcs.UpdateCpuStat()
 
 
 	items := funcs.CpuMetrics();
