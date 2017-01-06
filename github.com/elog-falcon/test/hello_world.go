@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("hello,world111")
+	fmt.Println("hello,world11122")
 
 	funcs.UpdateCpuStat()
 
