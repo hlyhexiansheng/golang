@@ -6,6 +6,7 @@ import (
 	"github.com/open-falcon/agent/funcs"
 	"github.com/open-falcon/agent/g"
 	"github.com/open-falcon/common/model"
+	"log"
 )
 
 func InitDataHistory() {
@@ -68,7 +69,9 @@ func collect(sec int64, fns []func() []*model.MetricValue) {
 			mvs[j].Step = sec
 			mvs[j].Endpoint = hostname
 			mvs[j].Timestamp = now
+			log.Println(mvs[j].String())
 		}
+		log.Println("--------split line ------------")
 
 		g.SendToTransfer(mvs)
 
